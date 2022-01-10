@@ -16,27 +16,17 @@ class Solution:
         if(len(s) % 2 != 0):
             return False
         index = 0
-        start = 0
+        list = []
         while(index < len(s)):
             # ([{のとき
             if s[index] in self.bracketDic:
-                index += 1
+                list.append(s[index])
             else:
-                if(start == index):
+                # カッコが来る前に閉じカッコが来るケース
+                if(len(list) == 0):
                     return False
-                # indexは閉じカッコの範囲の一番最初
-                diff = (index -1) - start
-                last = index + diff
-                closes = ""
-                # 入力されたカッコに対応する閉じカッコを逆順に取得する
-                for i in range(index - 1, start -1 , -1):
-                    closes += self.bracketDic[s[i]]
-                # 取得したカッコに対応する閉じカッコと、閉じカッコがあるであろうの範囲内の文字列を比較
-                if closes == s[index : last + 1]:
-                    # 検証した範囲の最後のlastの次を次の検証範囲にする
-                    index = last + 1
-                    start = index
-                else:
+                if(s[index] != self.bracketDic[list.pop(-1)]):
                     return False
-        return index == start
+            index += 1
+        return len(list) == 0
 # @lc code=end
