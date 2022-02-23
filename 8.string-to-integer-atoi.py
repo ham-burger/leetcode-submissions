@@ -27,23 +27,15 @@ class Solution:
                     negative=True
                     continue
 
-            if(has_sign):
-                if(c.isdigit()):
-                    result_str=result_str+c
-                else:
-                    break
+            if(c.isdigit()):
+                result_str=result_str+c
+                has_sign=True
             else:
-                if(c.isdigit()):
-                    has_sign=True
-                    result_str=result_str+c
-                else:
-                    break
-            continue
+                break
 
         result=int(result_str)
         if(negative):
             result=result* -1
-
 
         max_result=2147483647
         min_result=(max_result * -1)-1
